@@ -16,6 +16,8 @@ public class TimedShootMain extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      //new ShooterRun(),
+      new WaitCommand(2),
       new TimedServoTrigger(),
       new WaitCommand(.5),
       new PistonDown(),

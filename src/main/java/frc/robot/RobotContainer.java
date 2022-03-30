@@ -18,15 +18,18 @@ import frc.robot.commands.PistonDown;
 import frc.robot.commands.PistonToggle;
 import frc.robot.commands.PistonUp;
 import frc.robot.commands.ServoDown;
+import frc.robot.commands.ServoTest;
 import frc.robot.commands.ServoUp;
 import frc.robot.commands.ShooterRun;
 import frc.robot.commands.ShooterRunSlow;
 import frc.robot.commands.TimedServoTrigger;
 import frc.robot.commands.TimedShootMain;
+import frc.robot.commands.ToggleClimberPistons;
 import frc.robot.commands.ShooterRunSlow;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.ClimberInBox;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -40,10 +43,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   public static final XboxController driverController = new XboxController(0);
-  public static final PS4Controller shooterController = new PS4Controller(1);
+  //public static final PS4Controller shooterController = new PS4Controller(1);
 
   public static final AnalogGyro gyro = new AnalogGyro(0);
   public static final DriveTrain m_drivetrain = new DriveTrain(gyro);
+  public static final ClimberInBox m_climber = new ClimberInBox();
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -67,17 +71,18 @@ public class RobotContainer {
 
     // init the objects we want to bind
     JoystickButton button_a = new JoystickButton(this.driverController, 1);
-    JoystickButton button_b = new JoystickButton(this.shooterController, 2);
+    JoystickButton button_b = new JoystickButton(this.driverController, 2);
     JoystickButton button_x = new JoystickButton(this.driverController, 3);
     JoystickButton button_y = new JoystickButton(this.driverController, 4);
 
     JoystickButton left_bumper = new JoystickButton(this.driverController, 5);
     JoystickButton right_bumper = new JoystickButton(this.driverController, 6);
     ///button_b.whenPressed(new ServoDown());
-    button_a.whenPressed(new TimedShootMain());
-    
-
-    left_bumper.whileHeld(new IntakeRun());
+    button_a.whenPressed(new TimedShootMain()).whenPressed(new ShooterRun());
+    button_y.whenPressed(new TimedServoTrigger());
+    button_b.whenPressed(new ToggleClimberPistons());
+    left_bumper.whileHeld(new IntakeRun(.8));
+    right_bumper.whileHeld(new IntakeRun(-.8));
 
     button_x.whenPressed(new PistonToggle());
     //left_bumper.whenPressed(new PistonUp());

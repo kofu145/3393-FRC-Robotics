@@ -17,6 +17,9 @@ public class SolenoidSubsystem extends SubsystemBase {
   public DoubleSolenoid framePistonOne = null;
   public DoubleSolenoid framePistonTwo = null;
 
+  public DoubleSolenoid climbPistonOne = null;
+  public DoubleSolenoid climbPistonTwo = null;
+
   /** Creates a new SolenoidSubsystem. */
   public SolenoidSubsystem() {
     framePistonOne = new DoubleSolenoid
@@ -30,6 +33,19 @@ public class SolenoidSubsystem extends SubsystemBase {
       PneumaticsModuleType.CTREPCM,
       Constants.INTAKE_TWO_SOLENOID_DEPLOY,
       Constants.INTAKE_TWO_SOLENOID_RETRACT
+    );
+
+
+    climbPistonOne = new DoubleSolenoid(
+      PneumaticsModuleType.CTREPCM,
+      Constants.CLIMBER_ONE_SOLENOID_DEPLOY,
+      Constants.CLIMBER_ONE_SOLENOID_RETRACT
+    );
+
+    climbPistonTwo = new DoubleSolenoid(
+      PneumaticsModuleType.CTREPCM,
+      Constants.CLIMBER_TWO_SOLENOID_DEPLOY,
+      Constants.CLIMBER_TWO_SOLENOID_RETRACT
     );
 
   }
@@ -48,10 +64,23 @@ public class SolenoidSubsystem extends SubsystemBase {
   public void pitchDown() {
     framePistonOne.set(Value.kReverse);
     framePistonTwo.set(Value.kReverse);
+  }
 
+  public void pneumaticClimberUp() {
+    climbPistonOne.set(Value.kForward);
+    climbPistonTwo.set(Value.kForward);
+  }
+
+  public void pneumaticClimberDown() {
+    climbPistonOne.set(Value.kReverse);
+    climbPistonTwo.set(Value.kReverse);
   }
 
   public Value getPitch() {
     return framePistonOne.get();
+  }
+
+  public Value getClimberPitch() {
+    return climbPistonOne.get();
   }
 }

@@ -18,9 +18,12 @@ public class TimedServoTrigger extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new GateServoDown(),
+      new WaitCommand(.5),
       new ServoDown(),
       new WaitCommand(.35),
-      new ServoUp()
+      new ServoUp(),
+      new GateServoUp()
 
     );
   }

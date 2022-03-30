@@ -35,7 +35,7 @@ public class PistonToggle extends InstantCommand {
     }*/
 
     if (Robot.pneumatics.getPitch() == Value.kOff){
-      Robot.pneumatics.pitchUp();
+      Robot.pneumatics.pitchDown();
 
     }
     else if (Robot.pneumatics.getPitch() == Value.kForward){

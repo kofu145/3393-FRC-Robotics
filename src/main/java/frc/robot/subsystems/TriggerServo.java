@@ -23,22 +23,23 @@ public class TriggerServo extends SubsystemBase {
 
   }
 
-  public void pitchUp(int servo_num) {
-    switch (servo_num) {
-      case 1:
-        triggerServo.setAngle(130);
-      case 2:
-        secondaryServo.setAngle(100);
-    }
+  public void pitchUpTrigger() {
+        triggerServo.setAngle(180);
+        
   }
 
-  public void pitchDown(int servo_num) {
-    switch (servo_num) {
-      case 1:
-        triggerServo.setAngle(100);
-      case 2:
-        secondaryServo.setAngle(220);
-    }
+  public void pitchUpSecondary() {
+    secondaryServo.setAngle(120);
+
+  }
+
+  public void pitchDownTrigger() {
+      triggerServo.setAngle(90);
+
+  }
+
+  public void pitchDownSecondary() {
+    secondaryServo.setAngle(230);
   }
 
   public double getPos(int servo_num) {
@@ -50,6 +51,10 @@ public class TriggerServo extends SubsystemBase {
     }
     // if we fail
     return -1;
+  }
+
+  public void setPos(int angle) {
+    triggerServo.setAngle(90);
   }
 
 }

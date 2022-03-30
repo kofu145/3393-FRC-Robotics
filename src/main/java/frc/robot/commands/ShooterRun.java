@@ -29,7 +29,7 @@ public class ShooterRun extends CommandBase {
   public void execute() {
     double time = Timer.getFPGATimestamp();
     if (time - startTime < 3) {
-      RobotContainer.m_drivetrain.shooterMotorRun(.8);
+      RobotContainer.m_drivetrain.shooterMotorRun(.9);
     }
 
     else {

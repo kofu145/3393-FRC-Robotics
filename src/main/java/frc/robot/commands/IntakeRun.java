@@ -9,8 +9,10 @@ import frc.robot.RobotContainer;
 
 public class IntakeRun extends CommandBase {
   /** Creates a new IntakeRun. */
-  public IntakeRun() {
+  double speed;
+  public IntakeRun(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.speed = speed;
   }
 
   // Called when the command is initially scheduled.
@@ -22,7 +24,7 @@ public class IntakeRun extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_drivetrain.intakeMotorRun(.5);
+    RobotContainer.m_drivetrain.intakeMotorRun(speed);
   }
 
   // Called once the command ends or is interrupted.

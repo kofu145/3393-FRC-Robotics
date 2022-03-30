@@ -61,11 +61,21 @@ public class DriveArcade extends CommandBase {
     // all this is completely unecessary, learn how to use the command scheduler
 
 
+    
+    /*
     if (triggerDPad == 0){
-      speed = .8;
+      speed = .9;
     }
     else {
         speed = (double)triggerDPad * .0025;
+    }
+ */
+
+    if (triggerDPad == 0) {
+      speed = -1;
+    }
+    else if (triggerDPad == 180) {
+      speed = .4;
     }
 
     if (leftSpeed > 0)
@@ -84,8 +94,9 @@ public class DriveArcade extends CommandBase {
     
     //RobotContainer.m_drivetrain.tankDrive(leftSpeed, rightSpeed);
     RobotContainer.m_drivetrain.arcadeDrive(leftSpeed, rotation*-.8);
-    RobotContainer.m_drivetrain.shooterMotorRun(speed);
-
+    RobotContainer.m_climber.climb(speed);
+    //RobotContainer.m_drivetrain.shooterMotorRun(speed);
+    
     //RobotContainer.m_drivetrain.intakeMotorRun(intakeSpeed/2);
 
     
@@ -100,7 +111,7 @@ public class DriveArcade extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    disabledDriveTrain = true;
+    // disabledDriveTrain = true;
     RobotContainer.m_drivetrain.tankDrive(0, 0);
     RobotContainer.m_drivetrain.intakeMotorRun(0);
     RobotContainer.m_drivetrain.shooterMotorRun(0);

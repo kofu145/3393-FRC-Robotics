@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
 
     CameraServer.startAutomaticCapture();
     pneumatics = new SolenoidSubsystem();
+    //pneumatics.pitchDown();
     c = new Compressor(0, PneumaticsModuleType.CTREPCM);
     servoTrigger = new TriggerServo();
     //c.enableDigital();

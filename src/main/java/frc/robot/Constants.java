@@ -25,6 +25,8 @@ public final class Constants {
     public static final int INTAKE_TWO = 7;
     public static final int SHOOTER = 5;
 
+    public static final int CLIMBER = 6;
+
     public static final int DRIVER_CONTROLLER = 0;
     public static final int DRIVER_CONTROLLER_LEFT_AXIS = 1; // Change for your controller
     public static final int DRIVER_CONTROLLER_RIGHT_AXIS = 5; // Change for your controller
@@ -39,6 +41,11 @@ public final class Constants {
     public static final int INTAKE_ONE_SOLENOID_RETRACT = 1;
     public static final int INTAKE_TWO_SOLENOID_DEPLOY = 2;
     public static final int INTAKE_TWO_SOLENOID_RETRACT = 3;
+
+    public static final int CLIMBER_ONE_SOLENOID_DEPLOY = 4;
+    public static final int CLIMBER_ONE_SOLENOID_RETRACT = 5;
+    public static final int CLIMBER_TWO_SOLENOID_DEPLOY = 6;
+    public static final int CLIMBER_TWO_SOLENOID_RETRACT = 7;
 
     public static final int PROPORTIONAL_CONSTANT = 0; // tune this later
 

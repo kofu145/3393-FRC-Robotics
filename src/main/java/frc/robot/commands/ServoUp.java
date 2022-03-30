@@ -20,8 +20,7 @@ public class ServoUp extends InstantCommand {
   @Override
   public void initialize() {
     //Robot.servoTrigger.getPos();
-
-    Robot.servoTrigger.pitchUp(0);
-    Robot.servoTrigger.pitchUp(1);
+    //Robot.servoTrigger.pitchUp(0);
+    Robot.servoTrigger.pitchUpSecondary();
   }
 }

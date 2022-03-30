@@ -4,24 +4,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ServoDown extends InstantCommand {
-  public ServoDown() {
+public class ToggleClimberPistons extends InstantCommand {
+  public ToggleClimberPistons() {
     // Use addRequirements() here to declare subsystem dependencies.
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Robot.servoTrigger.pitchUp(0);
-    Robot.servoTrigger.pitchDownSecondary();
-    //Robot.servoTrigger.getPos();
+    if (Robot.pneumatics.getClimberPitch() == Value.kOff){
+      Robot.pneumatics.pneumaticClimberDown();
+
+    }
+    else if (Robot.pneumatics.getClimberPitch() == Value.kForward){
+      Robot.pneumatics.pneumaticClimberDown();
+
+    }
+    else if (Robot.pneumatics.getClimberPitch() == Value.kReverse){
+      Robot.pneumatics.pneumaticClimberUp();
+
+    }
   }
 }

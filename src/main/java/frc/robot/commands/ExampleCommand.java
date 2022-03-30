@@ -45,13 +45,13 @@ public class ExampleCommand extends CommandBase {
     //}
 
     if (time - startTime < 5) {
-      RobotContainer.m_drivetrain.shooterMotorRun(.8);
+      RobotContainer.m_drivetrain.shooterMotorRun(1);
 
     }
 
     
 
-    if (time - startTime < 2) {
+    if (time - startTime < 2) {//(time - startTime > 3 && time - startTime < 5.5) {
       RobotContainer.m_drivetrain.tankDrive(.6, .6);
     }
     
@@ -70,7 +70,7 @@ public class ExampleCommand extends CommandBase {
   public boolean isFinished() {
     double time = Timer.getFPGATimestamp();
 
-    if (time - startTime > 3 && !servoToggle) {
+    if (time - startTime > 2 && !servoToggle) {
       CommandScheduler.getInstance().schedule(new TimedServoTrigger());
       servoToggle = true;
     }
