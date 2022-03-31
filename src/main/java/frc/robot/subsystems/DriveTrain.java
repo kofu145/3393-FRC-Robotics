@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Encoder;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
@@ -24,10 +26,10 @@ public class DriveTrain extends SubsystemBase {
   WPI_TalonSRX intakeTwoMotorControl = null;
   WPI_TalonSRX shooterMotorControl = null;
 
-  MotorControllerGroup leftMotors = null;
-  MotorControllerGroup rightMotors = null;
-
   DifferentialDrive differentialDrive = null;
+
+  Encoder encoderLeft;
+  Encoder encoderRight;
 
   double speed;
   double rotation;
@@ -49,14 +51,29 @@ public class DriveTrain extends SubsystemBase {
     intakeTwoMotorControl = new WPI_TalonSRX(Constants.INTAKE_TWO);
     shooterMotorControl = new WPI_TalonSRX(Constants.SHOOTER);
 
+    rightBackMotorControl.follow(rightFrontMotorControl);
+    leftFrontMotorControl.follow(leftFrontMotorControl);
+
     this.gyro = gyro;
     rightFrontMotorControl.setInverted(true);
-    rightBackMotorControl.setInverted(true);
+    //rightBackMotorControl.setInverted(true);
 
-    leftMotors = new MotorControllerGroup(leftFrontMotorControl, leftBackMotorControl);
-    rightMotors = new MotorControllerGroup(rightFrontMotorControl, rightBackMotorControl);
+    differentialDrive = new DifferentialDrive(leftFrontMotorControl, rightFrontMotorControl);
 
-    differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
+    rightFrontMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kRightSlotIdx, Constants.kTimeoutMs);
+    leftFrontMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kLeftSlotIdx, Constants.kTimeoutMs);
+    shooterMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kShooterSlotIdx, Constants.kTimeoutMs);    
+
+    rightFrontMotorControl.config_kP(Constants.kRightSlotIdx, Constants.kP);
+    rightFrontMotorControl.config_kI(Constants.kRightSlotIdx, Constants.kI);
+    rightFrontMotorControl.config_kD(Constants.kRightSlotIdx, Constants.kD);
+    rightFrontMotorControl.config_kF(Constants.kRightSlotIdx, Constants.kF);
+
+    leftFrontMotorControl.config_kP(Constants.kLeftSlotIdx, Constants.kP);
+    leftFrontMotorControl.config_kI(Constants.kLeftSlotIdx, Constants.kI);
+    leftFrontMotorControl.config_kD(Constants.kLeftSlotIdx, Constants.kD);
+    leftFrontMotorControl.config_kF(Constants.kLeftSlotIdx, Constants.kF);
+
 
   }
 

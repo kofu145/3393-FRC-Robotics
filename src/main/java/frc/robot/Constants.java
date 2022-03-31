@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.drive.KilloughDrive;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -48,7 +50,49 @@ public final class Constants {
     public static final int CLIMBER_TWO_SOLENOID_RETRACT = 7;
 
     public static final int PROPORTIONAL_CONSTANT = 0; // tune this later
+    //public static final int INTEGRAL_CONSTANT ;
+    //public static final int DERIVATIVE_CONSTANT;
+
 
     public static final int TRIGGER_SERVO = 0;
     public static final int PROTECTOR_SERVO = 1;
+
+
+    // test talon stuff
+
+    /**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3.
+	 */
+	public static final int kLeftSlotIdx = 0;
+    public static final int kRightSlotIdx = 1;
+    public static final int kShooterSlotIdx = 2;
+
+
+	/**
+	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int kPIDLoopIdx = 0;
+
+    /**
+	 * Timeout value generally used in parameter configs
+     * Non-zero to block the config until success, zero to skip checking 
+     */
+    public static final int kTimeoutMs = 30;
+    
+    /**
+	 * Gains used in Current Closed Loop, to be adjusted accordingly
+     * Gains(kp, ki, kd, kf, izone, peak output);
+     */
+    public static final double kP = .1;
+    public static final double kI = .001;
+    public static final double kD = 0.0;
+    public static final double kF = 0.0;
+    public static final int kIzone = 0;
+    public static final double kPeakOutput = 1.0;
+    /** ---- Flat constants, you should not need to change these ---- */
+	/* We allow either a 0 or 1 when selecting a PID Index, where 0 is primary and 1 is auxiliary */
+	public final static int PID_PRIMARY = 0;
+	public final static int PID_TURN = 1;
 }
