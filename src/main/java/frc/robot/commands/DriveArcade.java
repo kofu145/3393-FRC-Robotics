@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 
+
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -54,7 +55,7 @@ public class DriveArcade extends CommandBase {
     boolean intakeReverse = RobotContainer.driverController.getRawButton(5);
 
     double speedBoostOne = RobotContainer.driverController.getRightTriggerAxis();
-    double intakeSpeed = RobotContainer.driverController.getLeftTriggerAxis();
+    double shooterSpeed = RobotContainer.driverController.getLeftTriggerAxis();
 
     int triggerDPad = RobotContainer.driverController.getPOV();
 
@@ -88,14 +89,14 @@ public class DriveArcade extends CommandBase {
     else if (rightSpeed < 0)
       rightSpeed = rightSpeed*.7 - (speedBoostOne*.3);
 
-    if (intakeReverse){
-      intakeSpeed *= -1;
-    }
+    
     
     //RobotContainer.m_drivetrain.tankDrive(leftSpeed, rightSpeed);
     RobotContainer.m_drivetrain.arcadeDrive(leftSpeed, rotation*-.8);
     RobotContainer.m_climber.climb(speed);
-    //RobotContainer.m_drivetrain.shooterMotorRun(speed);
+
+    if (RobotContainer.m_drivetrain.driveArcadeHasShooter)
+      RobotContainer.m_drivetrain.shooterMotorRun(shooterSpeed * 1.5);
     
     //RobotContainer.m_drivetrain.intakeMotorRun(intakeSpeed/2);
 

@@ -17,17 +17,20 @@ import frc.robot.commands.TimedParallelShootSlow;
 import frc.robot.commands.PistonDown;
 import frc.robot.commands.PistonToggle;
 import frc.robot.commands.PistonUp;
+import frc.robot.commands.SequentialTimedShoot;
 import frc.robot.commands.ServoDown;
 import frc.robot.commands.ServoTest;
 import frc.robot.commands.ServoUp;
 import frc.robot.commands.ShooterRun;
 import frc.robot.commands.ShooterRunSlow;
+import frc.robot.commands.ShooterSequentialRun;
 import frc.robot.commands.TimedServoTrigger;
 import frc.robot.commands.TimedShootMain;
 import frc.robot.commands.ToggleClimberPistons;
 import frc.robot.commands.ShooterRunSlow;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ClimberInBox;
 import frc.robot.subsystems.DriveTrain;
@@ -77,8 +80,14 @@ public class RobotContainer {
 
     JoystickButton left_bumper = new JoystickButton(this.driverController, 5);
     JoystickButton right_bumper = new JoystickButton(this.driverController, 6);
+
+    JoystickButton share_button = new JoystickButton(this.driverController, 7);
+    JoystickButton option_bButton = new JoystickButton(this.driverController, 8);
+    
     ///button_b.whenPressed(new ServoDown());
     button_a.whenPressed(new TimedShootMain()).whenPressed(new ShooterRun());
+    share_button.whenPressed(new SequentialTimedShoot()).whenPressed(new ShooterRunSlow());
+    option_bButton.whenPressed(new SequentialTimedShoot()).whenPressed(new ShooterSequentialRun());
     button_y.whenPressed(new TimedServoTrigger());
     button_b.whenPressed(new ToggleClimberPistons());
     left_bumper.whileHeld(new IntakeRun(.8));

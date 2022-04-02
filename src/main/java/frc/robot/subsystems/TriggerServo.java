@@ -24,7 +24,7 @@ public class TriggerServo extends SubsystemBase {
   }
 
   public void pitchUpTrigger() {
-        triggerServo.setAngle(180);
+      triggerServo.setAngle(200);
         
   }
 
@@ -34,7 +34,8 @@ public class TriggerServo extends SubsystemBase {
   }
 
   public void pitchDownTrigger() {
-      triggerServo.setAngle(90);
+    // coming in (open gate)
+      triggerServo.setAngle(50);
 
   }
 

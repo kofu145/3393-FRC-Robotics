@@ -27,7 +27,7 @@ public class TimedIntakeRun extends CommandBase {
   public void execute() {
     double time = Timer.getFPGATimestamp();
     if (time - startTime < .7) {
-      RobotContainer.m_drivetrain.intakeMotorRun(.4);
+      RobotContainer.m_drivetrain.intakeMotorRun(.37);
     }
     else {
       RobotContainer.m_drivetrain.intakeMotorRun(0);

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +28,7 @@ public class DriveTrain extends SubsystemBase {
   WPI_TalonSRX shooterMotorControl = null;
 
   DifferentialDrive differentialDrive = null;
+  public boolean driveArcadeHasShooter = true;
 
   Encoder encoderLeft;
   Encoder encoderRight;
@@ -56,13 +58,18 @@ public class DriveTrain extends SubsystemBase {
 
     this.gyro = gyro;
     rightFrontMotorControl.setInverted(true);
-    //rightBackMotorControl.setInverted(true);
+    rightBackMotorControl.setInverted(true);
 
     differentialDrive = new DifferentialDrive(leftFrontMotorControl, rightFrontMotorControl);
 
     rightFrontMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kRightSlotIdx, Constants.kTimeoutMs);
     leftFrontMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kLeftSlotIdx, Constants.kTimeoutMs);
     shooterMotorControl.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kShooterSlotIdx, Constants.kTimeoutMs);    
+
+    shooterMotorControl.config_kP(Constants.kShooterSlotIdx, Constants.kP);
+    shooterMotorControl.config_kI(Constants.kShooterSlotIdx, Constants.kI);
+    shooterMotorControl.config_kD(Constants.kShooterSlotIdx, Constants.kD);
+    shooterMotorControl.config_kF(Constants.kShooterSlotIdx, Constants.kF);
 
     rightFrontMotorControl.config_kP(Constants.kRightSlotIdx, Constants.kP);
     rightFrontMotorControl.config_kI(Constants.kRightSlotIdx, Constants.kI);
@@ -74,12 +81,14 @@ public class DriveTrain extends SubsystemBase {
     leftFrontMotorControl.config_kD(Constants.kLeftSlotIdx, Constants.kD);
     leftFrontMotorControl.config_kF(Constants.kLeftSlotIdx, Constants.kF);
 
-
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("SensorVel", shooterMotorControl.getSelectedSensorVelocity(Constants.kPIDLoopIdx));
+		SmartDashboard.putNumber("SensorPos", shooterMotorControl.getSelectedSensorPosition(Constants.kPIDLoopIdx));
+		SmartDashboard.putNumber("MotorOutputPercent", shooterMotorControl.getMotorOutputPercent());
   }
 
   public void calcRotateValue(double targetAngle){

@@ -27,9 +27,10 @@ public class ShooterRun extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    RobotContainer.m_drivetrain.driveArcadeHasShooter = false;
     double time = Timer.getFPGATimestamp();
     if (time - startTime < 3) {
-      RobotContainer.m_drivetrain.shooterMotorRun(.6);
+      RobotContainer.m_drivetrain.shooterMotorRun(.8);
     }
 
     else {
@@ -39,7 +40,9 @@ public class ShooterRun extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.m_drivetrain.driveArcadeHasShooter = true;
+  }
 
   // Returns true when the command should end.
   @Override
@@ -47,6 +50,7 @@ public class ShooterRun extends CommandBase {
     double time = Timer.getFPGATimestamp();
     if (time - startTime > 3) {
       RobotContainer.m_drivetrain.shooterMotorRun(0);
+      RobotContainer.m_drivetrain.driveArcadeHasShooter = true;
       return true;
     }
     return false;
